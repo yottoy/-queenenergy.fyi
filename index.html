@@ -3,9 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queen Energy - Free Wellness Guide</title>
+    <title>Queen Energy - Free Wellness Journal Download</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&display=swap');
+        
+        .font-bodoni {
+            font-family: 'Bodoni Moda', serif;
+        }
+        
+        .bg-queen-yellow {
+            background-color: #FFD54F;
+        }
+        
+        .bg-queen-navy {
+            background-color: #1A237E;
+        }
+        
+        .text-queen-coral {
+            color: #FF7077;
+        }
+        
+        .text-queen-gold {
+            color: #FFD700;
+        }
+
+        body {
+            background-color: #FFD54F;
+        }
+
+        .input-shadow {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
-<body>
-    <h1>Coming Soon</h1>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+        <!-- Book Cover -->
+        <div class="w-full md:w-1/2 max-w-md relative">
+            <div class="bg-queen-navy rounded-lg p-6 shadow-xl">
+                <!-- Decorative element -->
+                <div class="text-center mb-4">
+                    <svg class="w-16 h-6 mx-auto text-gray-400" viewBox="0 0 100 24">
+                        <path d="M0,12 C25,24 75,0 100,12" fill="none" stroke="currentColor" stroke-width="1"/>
+                    </svg>
+                </div>
+                
+                <!-- Free badge -->
+                <div class="absolute top-4 right-4">
+                    <div class="bg-yellow-400 text-queen-navy text-xs font-bold px-3 py-1 rounded-full">
+                        FREE DOWNLOAD INCLUDED
+                    </div>
+                </div>
+
+                <!-- Title -->
+                <h1 class="font-bodoni text-queen-coral text-4xl md:text-5xl font-bold text-center mb-4">
+                    QUEEN<br/>ENERGY
+                </h1>
+
+                <!-- Subtitle -->
+                <h2 class="font-bodoni text-queen-coral text-xl md:text-2xl text-center mb-4">
+                    The Complete Mental<br/>
+                    Health & Wellness<br/>
+                    Journal for Women
+                </h2>
+
+                <!-- Description -->
+                <p class="text-queen-gold text-center text-sm md:text-base">
+                    Your 52-Week Journey to<br/>
+                    Emotional Freedom, Self-Care<br/>
+                    & Personal Power
+                </p>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="w-full md:w-1/2 max-w-md">
+            <h2 class="font-bodoni text-queen-navy text-3xl md:text-4xl font-bold text-center md:text-left mb-8">
+                Enter Your Email To<br/>
+                Claim Your Free<br/>
+                Download
+            </h2>
+
+            <form class="space-y-4">
+                <div class="flex gap-2">
+                    <input 
+                        type="email" 
+                        placeholder="name@email.com"
+                        class="flex-1 px-4 py-3 rounded-lg border-0 input-shadow focus:ring-2 focus:ring-queen-coral"
+                        required
+                    />
+                    <button 
+                        type="submit"
+                        class="bg-queen-coral text-white px-6 py-3 rounded-lg font-bodoni hover:bg-opacity-90 transition-colors"
+                    >
+                        SEND
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
