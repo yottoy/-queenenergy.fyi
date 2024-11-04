@@ -18,6 +18,10 @@
         .input-shadow {
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -39,27 +43,88 @@
         </div>
 
         <!-- Form Section -->
-        <div>
+        <div id="formSection">
             <h2 class="text-3xl font-bold text-brand mb-8">
                 Enter Your Email To<br/>
                 Claim Your Free Download
             </h2>
 
-            <form class="space-y-4 max-w-sm mx-auto">
+            <form id="emailForm" class="space-y-4 max-w-sm mx-auto">
                 <input 
                     type="email" 
+                    id="emailInput"
+                    name="email"
                     placeholder="name@email.com"
                     class="w-full px-4 py-3 rounded-lg border-0 input-shadow focus:ring-2 focus:ring-[#223A5E] mb-4"
                     required
                 />
                 <button 
                     type="submit"
+                    id="submitButton"
                     class="w-full bg-[#223A5E] text-white px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-colors"
                 >
                     SEND
                 </button>
             </form>
         </div>
+
+        <!-- Thank You Message (Hidden by default) -->
+        <div id="thankYouSection" class="hidden">
+            <h2 class="text-3xl font-bold text-brand mb-4">
+                Thank You!
+            </h2>
+            <p class="text-xl text-brand">
+                Check your email for your free download.
+            </p>
+        </div>
+
+        <!-- Error Message (Hidden by default) -->
+        <div id="errorMessage" class="hidden text-red-600 mt-4">
+            Something went wrong. Please try again.
+        </div>
     </div>
+
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitButton = document.getElementById('submitButton');
+            const errorMessage = document.getElementById('errorMessage');
+            const formSection = document.getElementById('formSection');
+            const thankYouSection = document.getElementById('thankYouSection');
+            const email = document.getElementById('emailInput').value;
+
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+            errorMessage.classList.add('hidden');
+
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbwrBgYgg2RILO_lgI-XkjX6WltYEaT72Z2gFA4SY54SjWNaOtqXZAVlEkI6dZSVBpwR/exec', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email: email,
+                        source: window.location.href,
+                        utm_source: new URLSearchParams(window.location.search).get('utm_source'),
+                        utm_medium: new URLSearchParams(window.location.search).get('utm_medium'),
+                        utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign')
+                    })
+                });
+
+                if (response.ok) {
+                    // Show thank you message
+                    formSection.classList.add('hidden');
+                    thankYouSection.classList.remove('hidden');
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.classList.remove('hidden');
+                submitButton.disabled = false;
+                submitButton.textContent = 'SEND';
+            }
+        });
+    </script>
 </body>
 </html>
