@@ -59,7 +59,7 @@
                 </button>
 
                 <p class="text-xs text-gray-600 mt-2">
-                    By submitting this form, you agree to receive marketing emails about our products and services. You can unsubscribe at any time.
+                    By submitting your email, you agree to receive occasional emails about our products and services to help your wellness journey. We need this consent to send you the guide. You can unsubscribe at any time.
                 </p>
             </form>
         </div>
@@ -116,19 +116,4 @@
 
                 console.log('Response received:', response);
 
-                // Since we're using no-cors, we won't get response details
-                // but if we reach here, the request was sent
-                formSection.classList.add('hidden');
-                thankYouSection.classList.remove('hidden');
-                
-            } catch (error) {
-                console.error('Detailed error:', error);
-                errorMessage.textContent = 'Error: ' + error.message;
-                errorMessage.classList.remove('hidden');
-                submitButton.disabled = false;
-                submitButton.textContent = 'SEND';
-            }
-        });
-    </script>
-</body>
-</html>
+                // Since we're using no-
