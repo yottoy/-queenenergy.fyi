@@ -29,7 +29,7 @@
         <!-- Book Image -->
         <div class="mb-12">
             <img 
-                src="book-cover.jpg" 
+                src="book-cover.png" 
                 alt="QUEEN ENERGY: The Complete Mental Health & Wellness Journal for Women - Your 52-Week Journey to Emotional Freedom, Self-Care & Personal Power" 
                 class="w-64 mx-auto shadow-lg rounded-lg"
             />
@@ -80,7 +80,55 @@
         </div>
     </div>
 
-    [Previous script section remains the same]
-</script>
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitButton = document.getElementById('submitButton');
+            const errorMessage = document.getElementById('errorMessage');
+            const formSection = document.getElementById('formSection');
+            const thankYouSection = document.getElementById('thankYouSection');
+            const email = document.getElementById('emailInput').value;
+
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+            errorMessage.classList.add('hidden');
+
+            try {
+                // Log the request details
+                console.log('Sending request to:', 'https://script.google.com/macros/s/AKfycbwrBgYgg2RILO_lgI-XkjX6WltYEaT72Z2gFA4SY54SjWNaOtqXZAVlEkI6dZSVBpwR/exec');
+                
+                const response = await fetch('https://script.google.com/macros/s/AKfycbwrBgYgg2RILO_lgI-XkjX6WltYEaT72Z2gFA4SY54SjWNaOtqXZAVlEkI6dZSVBpwR/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        source: window.location.href,
+                        utm_source: new URLSearchParams(window.location.search).get('utm_source'),
+                        utm_medium: new URLSearchParams(window.location.search).get('utm_medium'),
+                        utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign')
+                    })
+                });
+
+                console.log('Response received:', response);
+
+                // Since we're using no-cors, we won't get response details
+                // but if we reach here, the request was sent
+                formSection.classList.add('hidden');
+                thankYouSection.classList.remove('hidden');
+                
+            } catch (error) {
+                console.error('Detailed error:', error);
+                errorMessage.textContent = 'Error: ' + error.message;
+                errorMessage.classList.remove('hidden');
+                submitButton.disabled = false;
+                submitButton.textContent = 'SEND';
+            }
+        });
+    </script>
 </body>
 </html>
